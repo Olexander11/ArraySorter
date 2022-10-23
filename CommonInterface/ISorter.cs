@@ -4,10 +4,11 @@ namespace CommonInterface
 {
     public interface ISorter
     {
-        int Speed { get; set; }
         string SorterName { get; }
 
-        List<(int, int, int)> SortList { get; set; }
+        IEnumerable<(int, int)> SortList { get; set; }
+
+        int[][] Array { get; set; }
 
 
         event EventHandler ComparingElementsEvent;

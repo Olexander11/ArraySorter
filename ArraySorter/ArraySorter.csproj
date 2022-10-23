@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logger\" />
+    <Folder Include="SortPlayer\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

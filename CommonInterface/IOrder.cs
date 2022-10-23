@@ -8,6 +8,6 @@ namespace CommonInterface
         string OrderName { get; }
         (int, int) ArraySize { get; set; }
 
-        List<(int, int)> GetNumerator();
+        IEnumerable<(int, int)> GetNumerator();
     }
 }

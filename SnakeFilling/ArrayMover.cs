@@ -3,14 +3,13 @@
     internal class ArrayMover
     {
         private (int, int) lastPoint = (0, 0);
-        internal List<(int, int)> Move(ComandType comandType, int steps)
+        internal IEnumerable<(int, int)> Move(ComandType comandType, int steps)
         {
-            List<(int, int)> result = new List<(int, int)>();
             if (lastPoint.Item1 == 0 && lastPoint.Item2 == 0)
             {
                 lastPoint.Item1 = 1;
                 lastPoint.Item2 = 1;
-                result.Add(lastPoint);
+                yield return lastPoint;
             }
 
             (int, int) currentPoint = lastPoint;
@@ -20,7 +19,7 @@
                     for (int i = lastPoint.Item1 + 1; i <= lastPoint.Item1 + steps; i++)
                     {
                         currentPoint.Item1 += i;
-                        result.Add(currentPoint);
+                        yield return currentPoint;
                     }
                     lastPoint = currentPoint;
                     break;
@@ -28,7 +27,7 @@
                     for (int i = lastPoint.Item2 + 1; i <= lastPoint.Item2 + steps; i++)
                     {
                         currentPoint.Item2 += i;
-                        result.Add(currentPoint);
+                        yield return currentPoint;
                     }
                     lastPoint = currentPoint;
                     break;
@@ -36,20 +35,37 @@
                     for (int i = lastPoint.Item1 + 1; i <= lastPoint.Item1 - steps; i--)
                     {
                         currentPoint.Item1 -= i;
-                        result.Add(currentPoint);
+                        yield return currentPoint;
                     }
                     lastPoint = currentPoint;
                     break;
                 case ComandType.up:
-                    for (int i = lastPoint.Item1 + 1; i <= lastPoint.Item2 - steps; i--)
+                    for (int i = lastPoint.Item2 + 1; i <= lastPoint.Item2 - steps; i--)
                     {
                         currentPoint.Item2 -= i;
-                        result.Add(currentPoint);
+                        yield return currentPoint;
+                    }
+                    lastPoint = currentPoint;
+                    break;
+                case ComandType.left_down:
+                    for (int i = lastPoint.Item1 + 1; i <= 1; i--)
+                    {
+                        currentPoint.Item2++;
+                        currentPoint.Item1--;
+                        yield return currentPoint;
+                    }
+                    lastPoint = currentPoint;
+                    break;
+                case ComandType.right_up:
+                    for (int i = lastPoint.Item2 + 1; i <= 1; i--)
+                    {
+                        currentPoint.Item1++;
+                        currentPoint.Item2--;
+                        yield return currentPoint;
                     }
                     lastPoint = currentPoint;
                     break;
             }
-            return result;
         }
     }
 }

@@ -182,5 +182,11 @@ namespace ArraySorter
             speedUpButton.Enabled = enableSorting;
             startSortingButton.Enabled = enableSorting;
         }
+
+
+        private void StartSortingButton_Click1(object sender, EventArgs e)
+        {
+            sorter.SortList = order.GetNumerator();
+        }
     }
 }

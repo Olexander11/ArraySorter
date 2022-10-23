@@ -1,32 +1,18 @@
 ﻿using CommonInterface;
 using System;
 
-
 namespace BubbleMethod
 {
     public class Sorter : ISorter
     {
-        private int speed = 1;
-        public int Speed { get => speed;
-            set 
-            {
-                lock (speedLock)
-                {
-                    if (value <= 1)
-                        speed = 1;
-                    else if (value >= 60 * 1000)
-                        speed = 60 * 1000;
-                    else
-                        speed = value;
-                }
-            } 
-        }
 
         private string sorterName = "Bubble Method";
         public string SorterName { get => sorterName; }
+        IEnumerable<(int, int)> sortList = new List<(int, int)>();
 
-        private List<(int, int, int)> sortList = new List<(int, int, int)>();
-        public List<(int, int, int)> SortList { get => sortList; set => sortList = value; }
+        private int[][] array = null;
+        public int[][] Array { get => array; set => array = value; }
+        public IEnumerable<(int, int)> SortList { get => sortList; set => sortList = value; }
 
         public event EventHandler ComparingElementsEvent;
         public event EventHandler ChangingElementsEvent;
@@ -35,34 +21,27 @@ namespace BubbleMethod
         {
             if (SortList.Any())
             {
-                (int, int, int) temp;
-                for (int j = 0; j <= SortList.Count - 2; j++)
+                (int, int)[] sortedArray = SortList.ToArray();
+                for (int j = 0; j <= sortedArray.Length - 1; j++)
                 {
-                    for (int i = 0; i <= SortList.Count - 2; i++)
+                    for (int i = 0; i <= sortedArray.Length - 2; i++)
                     {
-                        (int, int) first = (SortList[i].Item1, SortList[i].Item2);
-                        (int, int) second = (SortList[i+1].Item1, SortList[i+1].Item2);
+                        (int, int) first = (sortedArray[i].Item1, sortedArray[i].Item2);
+                        (int, int) second = (sortedArray[j].Item1, sortedArray[j].Item2);
                         ComparingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
-                        WaitSomeTieme();
-                        if (SortList[i].Item3 > SortList[i + 1].Item3)
+
+                        if (Array[sortedArray[i].Item1][sortedArray[i].Item2] > Array[sortedArray[i + 1].Item1][sortedArray[i + 1].Item2])
                         {
                             ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
-                            WaitSomeTieme();
-                            temp = SortList[i + 1];
-                            SortList[i + 1] = SortList[i];
-                            SortList[i] = temp;
+                            int tempElement = Array[sortedArray[i].Item1][sortedArray[i].Item2];
+                            Array[sortedArray[i].Item1][sortedArray[i].Item2] = Array[sortedArray[i + 1].Item1][sortedArray[i + 1].Item2];
+                            Array[sortedArray[i + 1].Item1][sortedArray[i + 1].Item2] = tempElement;
+                            (int, int) temp = sortedArray[i];
+                            sortedArray[i] = sortedArray[i + 1];
+                            sortedArray[i + 1] = temp;
                         } 
                     }
                 }
-            }
-        }
-
-        private readonly object speedLock = new object();
-        private void WaitSomeTieme()
-        {
-            lock (speedLock)
-            {
-                Thread.Sleep(Speed);
             }
         }
     }

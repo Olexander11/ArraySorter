@@ -2,7 +2,7 @@
 {
     internal abstract class Command
     {
-        public abstract List<(int, int)> Execute();
+        public abstract IEnumerable<(int, int)> Execute();
     }
 
     enum ComandType

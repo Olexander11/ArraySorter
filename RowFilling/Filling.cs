@@ -18,17 +18,15 @@ namespace RowFilling
 
         public string OrderName => "Row filling";
 
-        public List<(int, int)> GetNumerator()
-        {
-            List<(int, int)> result = new List<(int, int)>(); 
+        public IEnumerable<(int, int)> GetNumerator()
+        {             
             for (int i = 1; i <= columns; i++)
             {
                 for(int j = 1; j <= rows; j++)
                 {
-                    result.Add((i, j));
+                    yield return (i, j);
                 }
-            }
-            return result;
+            }           
         }
     }
 }

@@ -25,7 +25,7 @@
         }
 
 
-        public override List<(int, int)> Execute()
+        public override IEnumerable<(int, int)> Execute()
         {
             return mover.Move(comandType, steps);
         }

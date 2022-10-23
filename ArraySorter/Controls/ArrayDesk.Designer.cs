@@ -189,6 +189,7 @@ namespace ArraySorter
             this.startSortingButton.TabIndex = 12;
             this.startSortingButton.Text = "Start sorting";
             this.startSortingButton.UseVisualStyleBackColor = true;
+            this.startSortingButton.Click += StartSortingButton_Click1;
             // 
             // sortMethodComboBox
             // 

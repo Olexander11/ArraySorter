@@ -20,11 +20,12 @@ namespace SpiralFilling
 
         public string OrderName => "Spiral filling";
 
-        public List<(int, int)> GetNumerator()
+        public IEnumerable<(int, int)> GetNumerator()
         {
             SchemeBuilder builder = new SchemeBuilder();
             builder.GreateSchema(rows, columns);
-            return builder.GetMoves();
+            foreach (var item in builder.GetMoves())
+                yield return item;
         }
     }
 }
