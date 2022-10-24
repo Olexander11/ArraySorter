@@ -41,7 +41,7 @@ namespace ArraySorter.SortPlayer
 
         public void Run()
         {
-            if (commands.Any())
+            if (commands != null && commands.Any())
                 foreach (Command comand in commands)
                 {
                     comand.Play();

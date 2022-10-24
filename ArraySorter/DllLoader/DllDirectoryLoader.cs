@@ -45,13 +45,11 @@ namespace ArraySorter.DllLoader
                 Directory.EnumerateFiles(ConfigurationManager.AppSettings["SortDirectory"], "*.dll", SearchOption.AllDirectories)
                                  .Select(Assembly.LoadFrom));
 
-            var builder = new ContainerBuilder();
-            foreach (Assembly assembly in assemblies)
-            {
-                builder.RegisterAssemblyTypes(assembly);
-            }
+            ContainerBuilder builder = new ContainerBuilder();
 
-           return builder.Build();
+            builder.RegisterAssemblyTypes(assemblies.ToArray()).AsImplementedInterfaces();
+            IContainer container = builder.Build();
+            return container;
         }
 
     }

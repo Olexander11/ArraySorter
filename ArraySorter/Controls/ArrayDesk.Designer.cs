@@ -191,7 +191,7 @@ namespace ArraySorter
             this.startSortingButton.TabIndex = 12;
             this.startSortingButton.Text = "Start sorting";
             this.startSortingButton.UseVisualStyleBackColor = true;
-            this.startSortingButton.Click += StartSortingButton_Click1;
+            this.startSortingButton.Click += StartSortingButton_Click;
             // 
             // sortMethodComboBox
             // 
@@ -209,6 +209,7 @@ namespace ArraySorter
             this.confirmMethodButton.TabIndex = 10;
             this.confirmMethodButton.Text = "Confirm method & order";
             this.confirmMethodButton.UseVisualStyleBackColor = true;
+            this.confirmMethodButton.Click += ConfirmMethodButton_Click;
             // 
             // ramdomRadioButton
             // 
@@ -295,7 +296,7 @@ namespace ArraySorter
 
         }
 
-           #endregion
+        #endregion
 
         private System.Windows.Forms.Label arraySourceLabel;
         private System.Windows.Forms.Label sortingProcessLabel;

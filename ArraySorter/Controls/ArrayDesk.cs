@@ -119,7 +119,7 @@ namespace ArraySorter
         }
 
  
-        private void StartSortingButton_Click(object sender, EventArgs e)
+        private async void StartSortingButton_Click(object sender, EventArgs e)
         {
             DisableSelectSourseControls(true);
             DateTime startDate = DateTime.Now;
@@ -127,6 +127,7 @@ namespace ArraySorter
             string methodName = $"sort - {sorter.SorterName}, order - {order.OrderName}";
             sorter.ComparingElementsEvent += Sorter_ComparingElementsEvent;
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
+            sorter.SortList = order.GetNumerator();
             sorter.Sort();
             DateTime endDate = DateTime.Now;
             string sortedArrayStr = ArrayModelHelper.ArrayToString(array);
@@ -187,12 +188,6 @@ namespace ArraySorter
             speedDownButton.Enabled = enableSorting;
             speedUpButton.Enabled = enableSorting;
             startSortingButton.Enabled = enableSorting;
-        }
-
-
-        private void StartSortingButton_Click1(object sender, EventArgs e)
-        {
-            sorter.SortList = order.GetNumerator();
         }
 
 
