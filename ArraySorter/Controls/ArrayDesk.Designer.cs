@@ -171,6 +171,7 @@ namespace ArraySorter
             this.speedDownButton.TabIndex = 14;
             this.speedDownButton.Text = "speed down";
             this.speedDownButton.UseVisualStyleBackColor = true;
+            this.speedDownButton.Click += SpeedDownButton_Click;
             // 
             // speedUpButton
             // 
@@ -180,6 +181,7 @@ namespace ArraySorter
             this.speedUpButton.TabIndex = 13;
             this.speedUpButton.Text = "speed up";
             this.speedUpButton.UseVisualStyleBackColor = true;
+            this.speedUpButton.Click += SpeedUpButton_Click;
             // 
             // startSortingButton
             // 
@@ -290,6 +292,7 @@ namespace ArraySorter
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
 

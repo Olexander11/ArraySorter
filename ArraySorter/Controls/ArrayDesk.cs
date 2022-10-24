@@ -3,6 +3,7 @@ using ArraySorter.DB;
 using ArraySorter.DllLoader;
 using ArraySorter.Models;
 using ArraySorter.Models.ArrayModel;
+using ArraySorter.SortPlayer;
 using CommonInterface;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,13 @@ namespace ArraySorter
                 source.DataSource = db.SortedArrays.OrderBy(a => a.SortingStart).ToList();
                 sortingProcessDataGridView.DataSource = source;  
             }
+            invoker = new Invoker(500);
         }
         private int[,] array = null;
         private ISorter sorter = null;
         private IOrder order = null;
-        private int speed = 1;
         private bool sortHistoryByAsc = true;
+        private Invoker invoker;
 
         private void UpdateHistoryButton_Click(object sender, EventArgs e)
         {
@@ -126,29 +128,25 @@ namespace ArraySorter
                 db.SortedArrays.Add(sortedArray);
                 db.SaveChanges();
             }
+            invoker.Run();
         }
 
         private void Sorter_ComparingElementsEvent(object sender, EventArgs e)
         {
             ArraySorterEventArgument argument = (ArraySorterEventArgument)sender;
-            processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Style.BackColor = Color.Green;
-            processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Style.BackColor = Color.Green;
-            Thread.Sleep(speed);
-            processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Style.BackColor = Color.White;
-            processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Style.BackColor = Color.White;
+            Command compareCommand = new CompareCommand(processGridView, argument.firstElement, argument.secondElement);
+            Command returnCommand = new ReturnCommand(processGridView, argument.firstElement, argument.secondElement);
+            invoker.SetCommand(compareCommand);
+            invoker.SetCommand(returnCommand);
         }
 
         private void Sorter_ChangingElementsEvent(object sender, EventArgs e)
         {
             ArraySorterEventArgument argument = (ArraySorterEventArgument)sender;
-            processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Style.BackColor = Color.Red;
-            processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Style.BackColor = Color.Red;
-            object temtNum = processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Value;
-            processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Value = processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Value;
-            processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Value = temtNum;
-            Thread.Sleep(speed);
-            processGridView.Rows[argument.firstElement.Item1].Cells[argument.firstElement.Item2].Style.BackColor = Color.White;
-            processGridView.Rows[argument.secondElement.Item1].Cells[argument.secondElement.Item2].Style.BackColor = Color.White;
+            Command changeCommand = new ChangeCommand(processGridView, argument.firstElement, argument.secondElement);
+            Command returnCommand = new ReturnCommand(processGridView, argument.firstElement, argument.secondElement);
+            invoker.SetCommand(changeCommand);
+            invoker.SetCommand(returnCommand);
         }
 
         private void DisableSelectSourseControls(bool disableControl)
@@ -187,6 +185,25 @@ namespace ArraySorter
         private void StartSortingButton_Click1(object sender, EventArgs e)
         {
             sorter.SortList = order.GetNumerator();
+        }
+
+
+        private void SpeedUpButton_Click(object sender, EventArgs e)
+        {
+            ChangeSpeed(true);
+        }
+
+        private void SpeedDownButton_Click(object sender, EventArgs e)
+        {
+            ChangeSpeed(false);
+        }
+
+        private void ChangeSpeed(bool speedy)
+        {
+            if (speedy)
+                invoker.Speed += 10;
+            else
+                invoker.Speed -= 10;
         }
     }
 }

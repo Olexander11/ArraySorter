@@ -152,6 +152,7 @@
     <Compile Include="Controls\RandomArrayControl.Designer.cs">
       <DependentUpon>RandomArrayControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Receiver.cs" />
     <Compile Include="DB\DataBase.cs" />
     <Compile Include="DllLoader\DllDirectoryLoader.cs" />
     <Compile Include="Models\ArrayModel\ArrayModelHelper.cs" />
@@ -160,6 +161,11 @@
     <Compile Include="Models\GuidGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortPlayer\ChangeCommand.cs" />
+    <Compile Include="SortPlayer\Command.cs" />
+    <Compile Include="SortPlayer\CompareCommand.cs" />
+    <Compile Include="SortPlayer\Invoker.cs" />
+    <Compile Include="SortPlayer\ReturnCommand.cs" />
     <EmbeddedResource Include="Controls\ArrayDesk.resx">
       <DependentUpon>ArrayDesk.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,7 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logger\" />
-    <Folder Include="SortPlayer\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
