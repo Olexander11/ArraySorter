@@ -9,7 +9,10 @@ namespace BubbleSorter
 {
     public class Sorter : ISorter
     {
-
+        public override string ToString()
+        {
+            return SorterName;
+        }
         private string sorterName = "Bubble Method";
         public string SorterName { get => sorterName; }
         IEnumerable<(int, int)> sortList = new List<(int, int)>();
@@ -18,23 +21,23 @@ namespace BubbleSorter
         public int[,] Array { get => array; set => array = value; }
         public IEnumerable<(int, int)> SortList { get => sortList; set => sortList = value; }
 
-        public event EventHandler ComparingElementsEvent;
-        public event EventHandler ChangingElementsEvent;
+        public event EventHandler<ArraySorterEventArgument> ComparingElementsEvent;
+        public event EventHandler<ArraySorterEventArgument> ChangingElementsEvent;
 
         public void Sort()
         {
             if (SortList.Any())
             {
                 (int, int)[] sortedArray = SortList.ToArray();
-                for (int j = 0; j <= sortedArray.Length - 1; j++)
+                for (int j = 1; j <= sortedArray.Length; j++)
                 {
-                    for (int i = 0; i <= sortedArray.Length - 2; i++)
+                    for (int i = 0; i < sortedArray.Length - j; i++)
                     {
                         (int, int) first = (sortedArray[i].Item1, sortedArray[i].Item2);
-                        (int, int) second = (sortedArray[j].Item1, sortedArray[j].Item2);
+                        (int, int) second = (sortedArray[i + 1].Item1, sortedArray[i + 1].Item2);
                         ComparingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
 
-                        if (Array[sortedArray[i].Item1,sortedArray[i].Item2] > Array[sortedArray[i + 1].Item1, sortedArray[i + 1].Item2])
+                        if (Array[sortedArray[i].Item1, sortedArray[i].Item2] > Array[sortedArray[i + 1].Item1, sortedArray[i + 1].Item2])
                         {
                             ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
                             int tempElement = Array[sortedArray[i].Item1, sortedArray[i].Item2];

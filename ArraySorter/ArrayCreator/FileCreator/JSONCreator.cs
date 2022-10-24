@@ -1,27 +1,33 @@
 ﻿using ArraySorter.Controls;
 using System;
+using System.IO;
 
 namespace ArraySorter.ArrayCreator.FileCreator
 {
-    internal class JSONCreator : IFileArrayCreator, ISourceControl
+    internal class JSONCreator : IFileArrayCreator
     {
         private string path;
-
-        public event EventHandler<EventArgs> ArrayComplit;
 
         public JSONCreator(string path)
         {
             this.path = path;
         }   
 
-        public void Create()
-        {          
-            ArrayComplit?.Invoke(this, EventArgs.Empty);
-        }
+        int[,] IFileArrayCreator.Create()
+        { 
+            try
+            {
+                //using (StreamReader r = new StreamReader(path))
+                //{
 
-        public int[,] GetArray()
-        {
-            throw new NotImplementedException();
+                //}
+                //return ArrayConvertor.ArrayConvert();
+            }
+            catch
+            {
+
+            }
+            return null;
         }
     }
 }

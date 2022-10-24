@@ -10,10 +10,10 @@ namespace CommonInterfaces
     {
         public ArraySorterEventArgument((int, int) first, (int, int) second)
         {
-            firstElement = first;
-            secondElement = second;
+            FirstElement = first;
+            SecondElement = second;
         }
-        public (int, int) firstElement;
-        public (int, int) secondElement;
+        public (int, int) FirstElement { get;private set; }
+        public (int, int) SecondElement { get; private set; }
     }
 }

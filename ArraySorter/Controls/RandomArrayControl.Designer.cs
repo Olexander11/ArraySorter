@@ -39,11 +39,11 @@
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(22, 21);
+            this.infoLabel.Location = new System.Drawing.Point(22, 32);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(99, 16);
+            this.infoLabel.Size = new System.Drawing.Size(66, 16);
             this.infoLabel.TabIndex = 0;
-            this.infoLabel.Text = "Enter array size";
+            this.infoLabel.Text = "Array size";
             // 
             // xNumericUpDown
             // 
@@ -64,7 +64,7 @@
             // 
             // yNumericUpDown
             // 
-            this.yNumericUpDown.Location = new System.Drawing.Point(139, 67);
+            this.yNumericUpDown.Location = new System.Drawing.Point(119, 67);
             this.yNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -81,13 +81,12 @@
             // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(139, 116);
+            this.confirmButton.Location = new System.Drawing.Point(97, 106);
             this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(64, 24);
+            this.confirmButton.Size = new System.Drawing.Size(86, 32);
             this.confirmButton.TabIndex = 3;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
-            this.confirmButton.Click += ConfirmButton_Click;
             // 
             // RandomArrayControl
             // 

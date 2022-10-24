@@ -9,6 +9,8 @@ namespace ArraySorter.Controls
         public RandomArrayControl()
         {
             InitializeComponent();
+
+            confirmButton.Click += ConfirmButton_Click;
         }
 
         public event EventHandler<EventArgs> ArrayComplit;
@@ -19,20 +21,18 @@ namespace ArraySorter.Controls
             CreateArray();
         }
 
-        private async void CreateArray()
+        private void CreateArray()
         {
-           Task task = Task.Run (() => {
                 array = new int[(int)xNumericUpDown.Value, (int)yNumericUpDown.Value];
                 Random random = new Random();
-                for (int i = 1; i <= (int)xNumericUpDown.Value; i++)
+                for (int i = 0; i < (int)xNumericUpDown.Value; i++)
                 {
-                    for (int j = 1; j <= (int)yNumericUpDown.Value; j++)
+                    for (int j = 0; j < (int)yNumericUpDown.Value; j++)
                     {
                         array[i, j] = random.Next(1, 1000);
                     }
                 }
-            });
-            await task;
+
             ArrayComplit?.Invoke(this, EventArgs.Empty);
         }
 

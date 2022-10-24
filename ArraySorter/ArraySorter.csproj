@@ -41,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -121,6 +122,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayCreator\FileCreator\ArrayConvertor.cs" />
     <Compile Include="ArrayCreator\FileCreator\IFileArrayCreator.cs" />
     <Compile Include="ArrayCreator\FileCreator\JSONCreator.cs" />
     <Compile Include="ArrayCreator\FileCreator\XMLCreator.cs" />

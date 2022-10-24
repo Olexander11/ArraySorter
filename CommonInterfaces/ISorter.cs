@@ -14,9 +14,8 @@ namespace CommonInterfaces
 
         int[,] Array { get; set; }
 
-
-        event EventHandler ComparingElementsEvent;
-        event EventHandler ChangingElementsEvent;
+        event EventHandler<ArraySorterEventArgument> ComparingElementsEvent;
+        event EventHandler<ArraySorterEventArgument> ChangingElementsEvent;
 
         void Sort();
     }

@@ -50,6 +50,7 @@
             this.confirmButton.TabIndex = 1;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Click += ConfirmButton_Click;
             // 
             // fileButton
             // 
@@ -73,6 +74,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void ConfirmButton_Click1(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion

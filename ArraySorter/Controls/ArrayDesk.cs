@@ -18,6 +18,19 @@ namespace ArraySorter
     {
         public ArrayDesk()
         {
+            int[][] ar = new int[10][];
+            Random random = new Random();
+            for (int i = 0; i < ar.Length; i++)
+            {
+                ar[i] = new int[20];
+                for (int j = 0; j < ar[i].Length; j++)
+                {
+                    ar[i][j] = random.Next(1, 1000);
+                }
+            }
+
+
+
             InitializeComponent();
             sortMethodComboBox.DataSource = DllDirectoryLoader.LoadSorters();
             orderComboBox.DataSource = DllDirectoryLoader.LoadOrders();
@@ -114,7 +127,24 @@ namespace ArraySorter
             if (sender is ISourceControl source)
             {
                 array = source.GetArray();
-                processGridView.DataSource = array;
+                processGridView.Rows.Clear();
+                int height = array.GetLength(0);
+                int width = array.GetLength(1);
+
+                processGridView.ColumnCount = width;
+
+                for (int r = 0; r < height; r++)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(this.processGridView);
+
+                    for (int c = 0; c < width; c++)
+                    {
+                        row.Cells[c].Value = array[r, c];
+                    }
+
+                    processGridView.Rows.Add(row);
+                }
             }
         }
 
@@ -127,7 +157,9 @@ namespace ArraySorter
             string methodName = $"sort - {sorter.SorterName}, order - {order.OrderName}";
             sorter.ComparingElementsEvent += Sorter_ComparingElementsEvent;
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
+            order.ArraySize = (array.GetLength(0), array.GetLength(1));
             sorter.SortList = order.GetNumerator();
+            sorter.Array = array;
             sorter.Sort();
             DateTime endDate = DateTime.Now;
             string sortedArrayStr = ArrayModelHelper.ArrayToString(array);
@@ -140,22 +172,16 @@ namespace ArraySorter
             invoker.Run();
         }
 
-        private void Sorter_ComparingElementsEvent(object sender, EventArgs e)
+        private void Sorter_ComparingElementsEvent(object sender, ArraySorterEventArgument argument)
         {
-            ArraySorterEventArgument argument = (ArraySorterEventArgument)sender;
-            Command compareCommand = new CompareCommand(processGridView, argument.firstElement, argument.secondElement);
-            Command returnCommand = new ReturnCommand(processGridView, argument.firstElement, argument.secondElement);
+            Command compareCommand = new CompareCommand(processGridView, argument.FirstElement, argument.SecondElement);           
             invoker.SetCommand(compareCommand);
-            invoker.SetCommand(returnCommand);
         }
 
-        private void Sorter_ChangingElementsEvent(object sender, EventArgs e)
+        private void Sorter_ChangingElementsEvent(object sender, ArraySorterEventArgument argument)
         {
-            ArraySorterEventArgument argument = (ArraySorterEventArgument)sender;
-            Command changeCommand = new ChangeCommand(processGridView, argument.firstElement, argument.secondElement);
-            Command returnCommand = new ReturnCommand(processGridView, argument.firstElement, argument.secondElement);
+            Command changeCommand = new ChangeCommand(processGridView, argument.FirstElement, argument.SecondElement);
             invoker.SetCommand(changeCommand);
-            invoker.SetCommand(returnCommand);
         }
 
         private void DisableSelectSourseControls(bool disableControl)

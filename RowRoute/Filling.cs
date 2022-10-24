@@ -24,12 +24,16 @@ namespace RowRoute
         }
 
         public string OrderName => "Row filling";
+        public override string ToString()
+        {
+            return OrderName;
+        }
 
         public IEnumerable<(int, int)> GetNumerator()
         {
-            for (int i = 1; i <= columns; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 1; j <= rows; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     yield return (i, j);
                 }

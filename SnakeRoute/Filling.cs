@@ -24,6 +24,10 @@ namespace SnakeRoute
         }
 
         public string OrderName => "Snake filling";
+        public override string ToString()
+        {
+            return OrderName;
+        }
 
         public IEnumerable<(int, int)> GetNumerator()
         {

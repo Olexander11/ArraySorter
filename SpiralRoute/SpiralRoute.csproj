@@ -52,6 +52,7 @@
     <ProjectReference Include="..\CommonInterfaces\CommonInterfaces.csproj">
       <Project>{96d55e99-ee3e-4f3b-9a6c-45868949bd1a}</Project>
       <Name>CommonInterfaces</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

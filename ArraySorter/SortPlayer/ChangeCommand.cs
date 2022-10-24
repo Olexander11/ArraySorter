@@ -19,13 +19,17 @@ namespace ArraySorter.SortPlayer
         private DataGridView grid;
         private (int, int) firstPoint;
         private (int, int) secondPoint;
-        public override void Play()
+        public override async void Play(int sleep)
         {
             grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Style.BackColor = Color.Red;
             grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Style.BackColor = Color.Red;
             object temtNum = grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Value;
             grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Value = grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Value;
             grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Value = temtNum;
+
+            await Task.Delay(sleep);
+            grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Style.BackColor = Color.White;
+            grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Style.BackColor = Color.White;
         }
     }
 }

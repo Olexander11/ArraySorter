@@ -3,22 +3,16 @@ using System;
 
 namespace ArraySorter.ArrayCreator.FileCreator
 {
-    internal class XMLCreator : IFileArrayCreator, ISourceControl
+    internal class XMLCreator : IFileArrayCreator
     {
         private string path;
-        public event EventHandler<EventArgs> ArrayComplit;
 
         public XMLCreator(string path)
         {
             this.path = path;
         }   
 
-        public void Create()
-        {
-            ArrayComplit?.Invoke(this, EventArgs.Empty);
-        }
-
-        public int[,] GetArray()
+        int[,] IFileArrayCreator.Create()
         {
             throw new NotImplementedException();
         }

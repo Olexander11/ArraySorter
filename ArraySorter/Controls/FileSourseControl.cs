@@ -10,14 +10,17 @@ namespace ArraySorter.Controls
         public FileSourseControl()
         {
             InitializeComponent();
+            confirmButton.Visible = false;
         }
 
         public event EventHandler<EventArgs> ArrayComplit;
         private FileSourceTypeEnum fileSourceType = FileSourceTypeEnum.none;
+        private int[,] array;
+        private string filename;
 
         public int[,] GetArray()
         {
-            throw new NotImplementedException();
+            return array;
         }
 
         private void ConfirmButton_Click(object sender, System.EventArgs e)
@@ -25,36 +28,59 @@ namespace ArraySorter.Controls
             if (fileSourceType != FileSourceTypeEnum.none)
             {
                 IFileArrayCreator fileArrayCreator = null;
-                switch (fileSourceType)
+                try
                 {
-                    case FileSourceTypeEnum.xml:
-                        fileArrayCreator = new XMLCreator("path");
-                        break;
-                    case FileSourceTypeEnum.json:
-                        fileArrayCreator = new JSONCreator("path");     
-                        break;
+                    switch (fileSourceType)
+                    {
+                        case FileSourceTypeEnum.xml:
+                            fileArrayCreator = new XMLCreator(filename);
+                            break;
+                        case FileSourceTypeEnum.json:
+                            fileArrayCreator = new JSONCreator(filename);
+                            break;
+                    }
                 }
-                if (fileArrayCreator != null)
+                catch(Exception)
                 {
-                    fileArrayCreator.Create();
+                    MessageBox.Show("File parsing failed, try again!");
+                    confirmButton.Visible = false;
                 }
 
+                if (fileArrayCreator != null)
+                {
+                    try
+                    {
+                        array = fileArrayCreator.Create();
+                        ArrayComplit?.Invoke(this, EventArgs.Empty);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Array creating failed, try again!");
+                        confirmButton.Visible = false;
+                    }
+                }
             }
         }
 
-        private void FileSourseControl_ArrayComplit(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void FileButton_Click(object sender, System.EventArgs e)
-        {
+        {            
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 if (openFileDialog.ShowDialog() == DialogResult.Cancel)
                     return;
 
-                string filename = openFileDialog.FileName;
+                filename = openFileDialog.FileName;
+            }
+
+            if (filename.ToLower().EndsWith(".json"))
+            {
+               fileSourceType = FileSourceTypeEnum.json;
+                confirmButton.Visible = true;
+            }
+            if (filename.ToLower().EndsWith(".xml"))
+            {
+               fileSourceType = FileSourceTypeEnum.xml;
+                confirmButton.Visible = true;
             }
         }
     }

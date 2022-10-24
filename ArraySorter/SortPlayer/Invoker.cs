@@ -9,22 +9,19 @@ namespace ArraySorter.SortPlayer
 {
     internal class Invoker
     {
-        List<Command> commands;
-        int speed = 1;
+        List<Command> commands = new List<Command>();
+        int speed = 1000;
         public int Speed
         {
             get => speed;
             set
             {
-                lock (speedLock)
-                {
-                    if (value <= 1)
-                        speed = 1;
-                    else if (value >= 60 * 1000)
-                        speed = 60 * 1000;
-                    else
-                        speed = value;
-                }
+                if (value <= 1)
+                    speed = 1;
+                else if (value >= 60 * 1000)
+                    speed = 60 * 1000;
+                else
+                    speed = value;
             }
         }
 
@@ -39,16 +36,13 @@ namespace ArraySorter.SortPlayer
             commands.Add(c);
         }
 
-        public void Run()
+        public async void Run()
         {
             if (commands != null && commands.Any())
                 foreach (Command comand in commands)
                 {
-                    comand.Play();
-                    lock (speedLock)
-                    {
-                        Thread.Sleep(speed);
-                    }
+                    comand.Play(speed);
+                    await Task.Delay(speed);
                 }
         }
 
