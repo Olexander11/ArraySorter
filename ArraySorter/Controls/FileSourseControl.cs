@@ -46,6 +46,17 @@ namespace ArraySorter.Controls
         {
             throw new NotImplementedException();
         }
+
+        private void FileButton_Click(object sender, System.EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+                    return;
+
+                string filename = openFileDialog.FileName;
+            }
+        }
     }
 
     enum FileSourceTypeEnum

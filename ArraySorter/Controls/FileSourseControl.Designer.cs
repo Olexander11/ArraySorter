@@ -30,6 +30,7 @@
         {
             this.infoLabel = new System.Windows.Forms.Label();
             this.confirmButton = new System.Windows.Forms.Button();
+            this.fileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // infoLabel
@@ -43,22 +44,32 @@
             // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(104, 118);
+            this.confirmButton.Location = new System.Drawing.Point(105, 71);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(75, 22);
             this.confirmButton.TabIndex = 1;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.UseVisualStyleBackColor = true;
-            this.confirmButton.Click += ConfirmButton_Click;
+            // 
+            // fileButton
+            // 
+            this.fileButton.Location = new System.Drawing.Point(19, 38);
+            this.fileButton.Name = "fileButton";
+            this.fileButton.Size = new System.Drawing.Size(75, 22);
+            this.fileButton.TabIndex = 2;
+            this.fileButton.Text = "Open file";
+            this.fileButton.UseVisualStyleBackColor = true;
+            this.fileButton.Click += FileButton_Click;
             // 
             // FileSourseControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fileButton);
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.infoLabel);
             this.Name = "FileSourseControl";
-            this.Size = new System.Drawing.Size(205, 150);
+            this.Size = new System.Drawing.Size(205, 120);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,5 +79,6 @@
 
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button confirmButton;
+        private System.Windows.Forms.Button fileButton;
     }
 }
