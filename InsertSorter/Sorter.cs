@@ -16,8 +16,8 @@ namespace InsertSorter
 
         IEnumerable<(int, int)> sortList = new List<(int, int)>();
 
-        private int[][] array = null;
-        public int[][] Array { get => array; set => array = value; }
+        private int[,] array = null;
+        public int[,] Array { get => array; set => array = value; }
         public IEnumerable<(int, int)> SortList { get => sortList; set => sortList = value; }
 
         public event EventHandler ComparingElementsEvent;
@@ -32,10 +32,10 @@ namespace InsertSorter
                 int replaceItem = 0;
                 for (int i = 0; i < n - 1; ++i)
                 {
-                    int current = Array[sortedArray[i].Item1][sortedArray[i].Item2];
+                    int current = Array[sortedArray[i].Item1,sortedArray[i].Item2];
                     for (int j = i + 1; j < n; j++)
                     {
-                        int item = Array[sortedArray[j].Item1][sortedArray[j].Item2];
+                        int item = Array[sortedArray[j].Item1,sortedArray[j].Item2];
                         if (item < current)
                         {
                             current = item;
@@ -46,13 +46,13 @@ namespace InsertSorter
                         ComparingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
                     }
 
-                    if (current < Array[sortedArray[i].Item1][sortedArray[i].Item2])
+                    if (current < Array[sortedArray[i].Item1,sortedArray[i].Item2])
                     {
                         (int, int) first = (sortedArray[i].Item1, sortedArray[i].Item2);
                         (int, int) second = (sortedArray[replaceItem].Item1, sortedArray[replaceItem].Item2);
-                        int tempElement = Array[sortedArray[i].Item1][sortedArray[i].Item2];
-                        Array[sortedArray[i].Item1][sortedArray[i].Item2] = Array[sortedArray[replaceItem].Item1][sortedArray[replaceItem].Item2];
-                        Array[sortedArray[replaceItem].Item1][sortedArray[replaceItem].Item2] = tempElement;
+                        int tempElement = Array[sortedArray[i].Item1, sortedArray[i].Item2];
+                        Array[sortedArray[i].Item1,sortedArray[i].Item2] = Array[sortedArray[replaceItem].Item1,sortedArray[replaceItem].Item2];
+                        Array[sortedArray[replaceItem].Item1,sortedArray[replaceItem].Item2] = tempElement;
                         ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
                     }
                 }

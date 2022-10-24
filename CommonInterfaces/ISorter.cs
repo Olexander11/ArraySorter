@@ -12,7 +12,7 @@ namespace CommonInterfaces
 
         IEnumerable<(int, int)> SortList { get; set; }
 
-        int[][] Array { get; set; }
+        int[,] Array { get; set; }
 
 
         event EventHandler ComparingElementsEvent;
