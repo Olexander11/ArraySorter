@@ -146,7 +146,6 @@
       <DependentUpon>RandomArrayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Receiver.cs" />
-    <Compile Include="DB\DataBase.cs" />
     <Compile Include="DllLoader\DllDirectoryLoader.cs" />
     <Compile Include="Models\ArrayModel\ArrayModelHelper.cs" />
     <Compile Include="Models\ArrayModel\SortedArrayContext.cs" />

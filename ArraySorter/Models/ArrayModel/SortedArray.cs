@@ -9,7 +9,7 @@ namespace ArraySorter.Models.ArrayModel
         public string SorterName { get; set; }
         public string IncommingArray { get; set; }
         public string SortingArray { get; set; }
-        public DateTime SortingStart { get; set; }
-        public DateTime SortingEnd{ get; set; }
+        public string SortingStart { get; set; }
+        public string SortingEnd{ get; set; }
     }
 }

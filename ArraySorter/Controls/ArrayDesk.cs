@@ -1,5 +1,4 @@
 ﻿using ArraySorter.Controls;
-using ArraySorter.DB;
 using ArraySorter.DllLoader;
 using ArraySorter.Models;
 using ArraySorter.Models.ArrayModel;
@@ -165,7 +164,7 @@ namespace ArraySorter
             string sortedArrayStr = ArrayModelHelper.ArrayToString(array);
             using (SortedArrayContext db = new SortedArrayContext())
             {
-                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate, SortingEnd = endDate };
+                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate.ToLongDateString(), SortingEnd = endDate.ToLongDateString() };
                 db.SortedArrays.Add(sortedArray);
                 db.SaveChanges();
             }
