@@ -16,7 +16,6 @@ namespace ArraySorter.DllLoader
             try
             {
                 IContainer container = GetContainer();
-
                 return container.Resolve<IEnumerable<ISorter>>().ToArray();
             }
             catch (Exception ex)
@@ -30,7 +29,6 @@ namespace ArraySorter.DllLoader
             try
             {
                 IContainer container = GetContainer();
-
                 return container.Resolve<IEnumerable<IOrder>>().ToArray();
             }
             catch (Exception ex)
@@ -41,7 +39,8 @@ namespace ArraySorter.DllLoader
 
         private static IContainer GetContainer()
         {
-            var assemblies = new List<Assembly>();
+            List<Assembly> assemblies = new List<Assembly>();
+
             assemblies.AddRange(
                 Directory.EnumerateFiles(ConfigurationManager.AppSettings["SortDirectory"], "*.dll", SearchOption.AllDirectories)
                                  .Select(Assembly.LoadFrom));
@@ -49,7 +48,7 @@ namespace ArraySorter.DllLoader
             var builder = new ContainerBuilder();
             foreach (Assembly assembly in assemblies)
             {
-                builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces();
+                builder.RegisterAssemblyTypes(assembly);
             }
 
            return builder.Build();

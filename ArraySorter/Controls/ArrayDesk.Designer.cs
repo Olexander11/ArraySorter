@@ -221,6 +221,7 @@ namespace ArraySorter
             this.ramdomRadioButton.TabStop = true;
             this.ramdomRadioButton.Text = "Random";
             this.ramdomRadioButton.UseVisualStyleBackColor = true;
+            this.ramdomRadioButton.Click += RandomRadioButton_CheckedChanged;
             // 
             // fileRadioButton
             // 
@@ -232,6 +233,7 @@ namespace ArraySorter
             this.fileRadioButton.TabStop = true;
             this.fileRadioButton.Text = "File";
             this.fileRadioButton.UseVisualStyleBackColor = true;
+            this.fileRadioButton.Click += FileRadioButton_CheckedChanged;
             // 
             // historytabPage
             // 
@@ -293,8 +295,7 @@ namespace ArraySorter
 
         }
 
-
-        #endregion
+           #endregion
 
         private System.Windows.Forms.Label arraySourceLabel;
         private System.Windows.Forms.Label sortingProcessLabel;

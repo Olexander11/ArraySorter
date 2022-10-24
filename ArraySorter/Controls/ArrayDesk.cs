@@ -71,6 +71,10 @@ namespace ArraySorter
                 fileRadioButton.Checked = false;
                 ArraySourceSelected(true);
             }
+            else
+            {
+                fileRadioButton.Checked = true;
+            }
         }
 
         private void FileRadioButton_CheckedChanged(object sender, System.EventArgs e)
@@ -80,22 +84,26 @@ namespace ArraySorter
                 ramdomRadioButton.Checked = false;
                 ArraySourceSelected(false);
             }
+            else
+            {
+                ramdomRadioButton.Checked = true;
+            }
         }
 
         private void ArraySourceSelected(bool isRandom)
         {
             arraySourcePanel.SuspendLayout();
+            arraySourcePanel.Controls.Clear();
             Control control = null;
             if (isRandom)
             {
-                control = new RandomArrayControl();
-
+                control = new RandomArrayControl();                
             }
             else
             {
                 control = new FileSourseControl();
-
             }
+            control.Invalidate();
             arraySourcePanel.Controls.Add(control);
             arraySourcePanel.ResumeLayout();
             (control as ISourceControl).ArrayComplit += ArrayDesk_ArrayComplit;
