@@ -4,11 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <BaseOutputPath>..\SortDlls</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonInterface\CommonInterface.csproj" />
+    <ProjectReference Include="..\CommonInterface\CommonInterface1.csproj" />
   </ItemGroup>
 
 </Project>

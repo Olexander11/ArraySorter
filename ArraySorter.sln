@@ -5,17 +5,17 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArraySorter", "ArraySorter\ArraySorter.csproj", "{BC60ADD6-936B-4AF7-8003-1B810699A81D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BubbleMethod", "BubbleMethod\BubbleMethod.csproj", "{64453A4C-B42F-4CB9-871A-4BBC88ECEB10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BubbleMethod1", "BubbleMethod\BubbleMethod1.csproj", "{64453A4C-B42F-4CB9-871A-4BBC88ECEB10}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsertMethod", "InsertMethod\InsertMethod.csproj", "{73ECEF16-11BD-41BA-B80B-C095DBD1C58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsertMethod1", "InsertMethod\InsertMethod1.csproj", "{73ECEF16-11BD-41BA-B80B-C095DBD1C58D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RowFilling", "RowFilling\RowFilling.csproj", "{7155C588-B447-42F9-811F-97139F2F1D51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RowFilling1", "RowFilling\RowFilling1.csproj", "{7155C588-B447-42F9-811F-97139F2F1D51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonInterface", "CommonInterface\CommonInterface.csproj", "{EAEB23AA-C07B-4B57-9572-EBD4E7025F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterface1", "CommonInterface\CommonInterface1.csproj", "{EAEB23AA-C07B-4B57-9572-EBD4E7025F2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiralFilling", "SpiralFilling\SpiralFilling.csproj", "{D555673D-499E-4E20-BA82-FD6798433523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpiralFilling1", "SpiralFilling\SpiralFilling1.csproj", "{D555673D-499E-4E20-BA82-FD6798433523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeFilling", "SnakeFilling\SnakeFilling.csproj", "{7707241C-DE19-4AB0-A719-5AEEC9222747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakeFilling1", "SnakeFilling\SnakeFilling1.csproj", "{7707241C-DE19-4AB0-A719-5AEEC9222747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
