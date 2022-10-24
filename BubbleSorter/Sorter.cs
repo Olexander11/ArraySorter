@@ -40,9 +40,6 @@ namespace BubbleSorter
                             int tempElement = Array[sortedArray[i].Item1][sortedArray[i].Item2];
                             Array[sortedArray[i].Item1][sortedArray[i].Item2] = Array[sortedArray[i + 1].Item1][sortedArray[i + 1].Item2];
                             Array[sortedArray[i + 1].Item1][sortedArray[i + 1].Item2] = tempElement;
-                            (int, int) temp = sortedArray[i];
-                            sortedArray[i] = sortedArray[i + 1];
-                            sortedArray[i + 1] = temp;
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using CommonInterface;
+using CommonInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

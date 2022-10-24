@@ -4,7 +4,7 @@ using ArraySorter.DllLoader;
 using ArraySorter.Models;
 using ArraySorter.Models.ArrayModel;
 using ArraySorter.SortPlayer;
-using CommonInterface;
+using CommonInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

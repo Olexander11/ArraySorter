@@ -53,9 +53,6 @@ namespace InsertSorter
                         int tempElement = Array[sortedArray[i].Item1][sortedArray[i].Item2];
                         Array[sortedArray[i].Item1][sortedArray[i].Item2] = Array[sortedArray[replaceItem].Item1][sortedArray[replaceItem].Item2];
                         Array[sortedArray[replaceItem].Item1][sortedArray[replaceItem].Item2] = tempElement;
-                        (int, int) temp = sortedArray[i];
-                        sortedArray[i] = sortedArray[replaceItem];
-                        sortedArray[replaceItem] = temp;
                         ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
                     }
                 }
