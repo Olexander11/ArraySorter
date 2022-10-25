@@ -141,26 +141,32 @@ namespace ArraySorter
             {
                 array = source.GetArray();
                 processGridView.Rows.Clear();
-                int height = array.GetLength(0);
-                int width = array.GetLength(1);
+                int arrayRow = array.GetLength(0);
+                int arrayColumn = array.GetLength(1);
 
-                string message = $"Selectede Array {height}X{width}.";
-                logger.Log(message);
+                //string message = $"Selectede Array {arrayRow}X{arrayColumn}.";
+                //logger.Log(message);
 
-                processGridView.ColumnCount = width;
+                processGridView.ColumnCount = arrayColumn;
 
-                for (int r = 0; r < height; r++)
+                for (int r = 0; r < arrayRow; r++)
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(this.processGridView);
-
-                    for (int c = 0; c < width; c++)
+                    
+                    for (int c = 0; c < arrayColumn; c++)
                     {
                         row.Cells[c].Value = array[r, c];
-                    }
+                    }                  
 
                     processGridView.Rows.Add(row);
                 }
+                foreach(object col in processGridView.Columns)
+                {
+                    DataGridViewColumn column = col as DataGridViewColumn;
+                    column.Width = processPanel.Width / arrayColumn;
+                }
+
                 processGridView.ClearSelection();
                 processGridView.CurrentCell = null;
             }
@@ -177,10 +183,12 @@ namespace ArraySorter
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
             order.ArraySize = (array.GetLength(0), array.GetLength(1));
             sorter.SortList = order.GetNumerator();
+
+            var tt = sorter.SortList.ToList();
             sorter.Array = array;
             sortingProcessLabel.Text = "Sorting culculation. Wait some time....";
-            string message = $"Start sortimg with method - {methodName}";
-            logger.Log(message);
+            //string message = $"Start sortimg with method - {methodName}";
+            //logger.Log(message);
             sorter.Sort();
             sortingProcessLabel.Text = "Sorting end. Look the process";
             DateTime endDate = DateTime.Now;
