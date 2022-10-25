@@ -8,6 +8,6 @@ namespace ArraySorter.SortPlayer
 {
     internal abstract class Command
     {
-        public abstract void Play(int sleep);
+        public abstract Task Play(int sleep);
     }
 }

@@ -15,7 +15,7 @@ namespace ArraySorter.SortPlayer
         private DataGridView grid;
         private (int, int) firstPoint;
         private (int, int) secondPoint;
-        public override async void Play(int sleep)
+        public override async Task Play(int sleep)
         {
             grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Style.BackColor = Color.Green;
             grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Style.BackColor = Color.Green;

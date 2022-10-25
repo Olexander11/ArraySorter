@@ -10,13 +10,10 @@ namespace CommonInterfaces
     {
         string SorterName { get; }
 
-        IEnumerable<(int, int)> SortList { get; set; }
-
-        int[,] Array { get; set; }
-
         event EventHandler<ArraySorterEventArgument> ComparingElementsEvent;
         event EventHandler<ArraySorterEventArgument> ChangingElementsEvent;
 
-        void Sort();
+        void Sort(int[,] array, IOrder order);
+
     }
 }

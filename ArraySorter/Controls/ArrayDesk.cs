@@ -47,7 +47,7 @@ namespace ArraySorter
             speedUpButton.Click += SpeedUpButton_Click;
             speedDownButton.Click += SpeedDownButton_Click;
 
-            Logger.Logger logger = Logger.Logger.getInstance();
+            logger = Logger.Logger.getInstance();
         }
 
         private void Invoker_MovieStoped(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace ArraySorter
         private IOrder order = null;
         private bool sortHistoryByAsc = true;
         private Invoker invoker;
-        private Logger.Logger logger;
+        private NLog.Logger logger;
         private void UpdateHistoryButton_Click(object sender, EventArgs e)
         {
             UpdateHistoryGreed();
@@ -179,15 +179,14 @@ namespace ArraySorter
             DateTime startDate = DateTime.Now;
             string incommingArrayStr = JsonConvert.SerializeObject(array); 
             string methodName = $"sort - {sorter.SorterName}, order - {order.OrderName}";
+            sorter.ComparingElementsEvent -= Sorter_ComparingElementsEvent;
+            sorter.ChangingElementsEvent -= Sorter_ChangingElementsEvent;
             sorter.ComparingElementsEvent += Sorter_ComparingElementsEvent;
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
-            order.ArraySize = (array.GetLength(0), array.GetLength(1));
-            sorter.SortList = order.GetNumerator();
-            sorter.Array = array;
-            sortingProcessLabel.Text = "Sorting culculation. Wait some time....";
-            //string message = $"Start sortimg with method - {methodName}";
-            //logger.Log(message);
-            sorter.Sort();
+            sortingProcessLabel.Text = "Sorting calculation. Wait some time....";
+            logger.Log(NLog.LogLevel.Info, $"Start sorting with method - {methodName}");
+            invoker.Clear();
+            sorter.Sort(array, order);
             sortingProcessLabel.Text = "Sorting end. Look the process";
             DateTime endDate = DateTime.Now;
             string sortedArrayStr = JsonConvert.SerializeObject(array);
@@ -260,9 +259,9 @@ namespace ArraySorter
         private void ChangeSpeed(bool speedy)
         {
             if (speedy)
-                invoker.Speed -= 10;
+                invoker.Speed /= 2;
             else
-                invoker.Speed += 10;
+                invoker.Speed *= 2;
         }
     }
 }

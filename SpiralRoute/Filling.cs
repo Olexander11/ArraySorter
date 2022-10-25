@@ -9,19 +9,6 @@ namespace SpiralRoute
 {
     public class Filling : IOrder
     {
-        private int rows = 1;
-        private int columns = 1;
-        public (int, int) ArraySize
-        {
-            get => (rows, columns);
-            set
-            {
-                if (value.Item1 > 0)
-                    rows = value.Item1;
-                if (value.Item2 > 0)
-                    columns = value.Item2;
-            }
-        }
 
         public string OrderName => "Spiral filling";
         public override string ToString()
@@ -29,78 +16,49 @@ namespace SpiralRoute
             return OrderName;
         }
 
-        public IEnumerable<(int, int)> GetNumerator()
+        public IEnumerable<(int, int)> GetNumerator(int rows, int columns)
         {
-            return GetNumerator2();
-            //SchemeBuilder builder = new SchemeBuilder();
-            //builder.GreateSchema(rows, columns);
-            //foreach (var item in builder.GetMoves())
-            //    yield return item;
-        }
-
-        public IEnumerable<(int, int)> GetNumerator2()
-        {
-            int circles = (int)Math.Ceiling(Math.Min(rows, columns) / 2.0);
-
-            int count = 0;
-            for (int c = 0; c < circles; c++)
+            int top = 0, bottom = rows - 1, left = 0, right = columns - 1;
+            int dir = 1;
+            while (top <= bottom && left <= right)
             {
-                // up row
-                if (c == columns - c - 1)
+
+                if (dir == 1)
                 {
-                    count++;
-                    yield return (c, c);
-                }
-                else
-                {
-                    if (count < rows * columns)
+                    for (int i = left; i <= right; ++i)
                     {
-                        for (int i = c; i < columns - c - 1; i++)
-                        {
-                            count++;
-                            yield return (c, i);
-                        }
+                        yield return (top, i);
                     }
+                    ++top;
+                    dir = 2;
                 }
-
-
-                // right col
-                if (c == rows - c - 1)
+                else if (dir == 2)
                 {
-                    count++;
-                    yield return (c, c);
-                }
-                else
-                {
-                    if (count < rows * columns)
+                    for (int i = top; i <= bottom; ++i)
                     {
-                        for (int i = c; i < rows - c - 1; i++)
-                        {
-                            count++;
-                            yield return (i, columns - c - 1);
-                        }
+                        yield return (i, right);
+
                     }
+                    --right;
+                    dir = 3;
                 }
-
-
-                // down row
-                if (count < rows * columns)
+                else if (dir == 3)
                 {
-                    for (int i = columns - c - 1; i > c - 1; i--)
+                    for (int i = right; i >= left; --i)
                     {
-                        count++;
-                        yield return (rows - c - 1, i);
+                        yield return (bottom, i);
                     }
+                    --bottom;
+                    dir = 4;
                 }
-
-                // up col
-                if (count < rows * columns)
+                else if (dir == 4)
                 {
-                    for (int i = rows - c - 1; i > c - 1; i--)
+                    for (int i = bottom; i >= top; --i)
                     {
-                        count++;
-                        yield return (i, c);
+                        yield return (i, left);
                     }
+                    ++left;
+                    dir = 1;
                 }
             }
         }

@@ -10,24 +10,18 @@ namespace ArraySorter.Logger
 {
     public class Logger
     {
-        private static string filePath = Path.GetDirectoryName(Application.ExecutablePath);
-        private static string fullPathName = Path.Combine(filePath, "log.txt");
-        private static Logger instance;
+        private static NLog.Logger instance;
 
         private Logger()
         { }
 
-        public static Logger getInstance()
+        public static NLog.Logger getInstance()
         {
             if (instance == null)
-                instance = new Logger();
+            {
+                instance = NLog.LogManager.GetCurrentClassLogger();
+            }
             return instance;
-        }
-
-        public void Log(string text)
-        {
-            string logText = $"{DateTime.Now.ToLongDateString()} | {text}" + Environment.NewLine;
-            File.WriteAllText(fullPathName, logText);
         }
     }
 }

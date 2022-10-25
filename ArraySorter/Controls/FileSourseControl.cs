@@ -12,14 +12,14 @@ namespace ArraySorter.Controls
             InitializeComponent();
             fileButton.Click += FileButton_Click;
             confirmButton.Click += ConfirmButton_Click;
-            Logger.Logger logger = Logger.Logger.getInstance();
+            logger = Logger.Logger.getInstance();
         }
 
         public event EventHandler<EventArgs> ArrayComplit;
         private FileSourceTypeEnum fileSourceType = FileSourceTypeEnum.none;
         private int[,] array;
         private string filename;
-        private Logger.Logger logger;
+        private NLog.Logger logger;
 
         public int[,] GetArray()
         {
@@ -46,7 +46,7 @@ namespace ArraySorter.Controls
                             }
                             catch (Exception ex)
                             {
-                                logger.Log(ex.Message);
+                                logger.Log(NLog.LogLevel.Error,  ex.Message);
                                 throw;
                             }
                         }
@@ -67,7 +67,7 @@ namespace ArraySorter.Controls
                             }
                             catch (Exception ex)
                             {
-                                logger.Log(ex.Message);
+                                logger.Log(NLog.LogLevel.Error, ex.Message);
                                 throw;
                             }
                         }
@@ -77,7 +77,7 @@ namespace ArraySorter.Controls
             catch (Exception)
             {
                 MessageBox.Show("File parsing failed, try again!");
-                logger.Log("File parsing failed, try again!");
+                logger.Log(NLog.LogLevel.Error, "File parsing failed, try again!"); 
             }
 
             if (fileArrayCreator != null)
@@ -89,8 +89,8 @@ namespace ArraySorter.Controls
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Array creating failed, try again!");
-                    logger.Log("Array creating failed, try again!");
+                    MessageBox.Show("Array creating failed, try again!");     
+                    logger.Log(NLog.LogLevel.Error, "Array creating failed, try again!");
                 }
             }
         }

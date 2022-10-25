@@ -15,38 +15,32 @@ namespace BubbleSorter
         }
         private string sorterName = "Bubble Method";
         public string SorterName { get => sorterName; }
-        IEnumerable<(int, int)> sortList = new List<(int, int)>();
 
-        private int[,] array = null;
-        public int[,] Array { get => array; set => array = value; }
-        public IEnumerable<(int, int)> SortList { get => sortList; set => sortList = value; }
 
         public event EventHandler<ArraySorterEventArgument> ComparingElementsEvent;
         public event EventHandler<ArraySorterEventArgument> ChangingElementsEvent;
 
-        public void Sort()
+        public void Sort(int[,] array, IOrder order)   // moving left->right)
         {
-            if (SortList.Any())
+            (int, int)[] sortedArray = order.GetNumerator(array.GetLength(0), array.GetLength(1)).ToArray();
+            for (int j = 1; j <= sortedArray.Length; j++)
             {
-                (int, int)[] sortedArray = SortList.ToArray();
-                for (int j = 1; j <= sortedArray.Length; j++)
+                for (int i = 0; i < sortedArray.Length - j; i++)
                 {
-                    for (int i = 0; i < sortedArray.Length - j; i++)
-                    {
-                        (int, int) first = (sortedArray[i].Item1, sortedArray[i].Item2);
-                        (int, int) second = (sortedArray[i + 1].Item1, sortedArray[i + 1].Item2);
-                        ComparingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
+                    (int, int) first = sortedArray[i];
+                    (int, int) second = sortedArray[i + 1];
+                    ComparingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
 
-                        if (Array[sortedArray[i].Item1, sortedArray[i].Item2] > Array[sortedArray[i + 1].Item1, sortedArray[i + 1].Item2])
-                        {
-                            ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
-                            int tempElement = Array[sortedArray[i].Item1, sortedArray[i].Item2];
-                            Array[sortedArray[i].Item1, sortedArray[i].Item2] = Array[sortedArray[i + 1].Item1, sortedArray[i + 1].Item2];
-                            Array[sortedArray[i + 1].Item1, sortedArray[i + 1].Item2] = tempElement;
-                        }
+                    if (array[first.Item1, first.Item2] > array[second.Item1, second.Item2])
+                    {
+                        ChangingElementsEvent?.Invoke(this, new ArraySorterEventArgument(first, second));
+                        int tempElement = array[first.Item1, first.Item2];
+                        array[first.Item1, first.Item2] = array[second.Item1, second.Item2];
+                        array[second.Item1, second.Item2] = tempElement;
                     }
                 }
             }
+
         }
     }
 }

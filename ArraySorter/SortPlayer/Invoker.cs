@@ -41,10 +41,34 @@ namespace ArraySorter.SortPlayer
             if (commands != null && commands.Any())
                 foreach (Command comand in commands)
                 {
-                    comand.Play(speed);
-                    await Task.Delay(speed);
+                    await comand.Play(speed);
+                    if (_stoped)
+                        break;
+                    while (_paused)
+                    {
+                        await Task.Delay(speed);
+                        if (_stoped)
+                            break;
+                    }
                 }
             MovieStoped?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Stop()
+        {
+            _stoped = true;
+        }
+
+        bool _stoped = false;
+        bool _paused = false;
+        public void Pause()
+        {
+            _paused = true;
+        }
+
+        public void Continue()
+        {
+            _paused = false;
         }
 
         public void Clear()

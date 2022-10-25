@@ -5,8 +5,7 @@ namespace CommonInterfaces
     public interface IOrder
     {
         string OrderName { get; }
-        (int, int) ArraySize { get; set; }
 
-        IEnumerable<(int, int)> GetNumerator();
+        IEnumerable<(int, int)> GetNumerator(int rows, int columns);
     }
 }

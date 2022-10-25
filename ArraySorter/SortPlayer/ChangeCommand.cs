@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,11 @@ namespace ArraySorter.SortPlayer
         private DataGridView grid;
         private (int, int) firstPoint;
         private (int, int) secondPoint;
-        public override async void Play(int sleep)
+        public override async Task Play(int sleep)
         {
             grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Style.BackColor = Color.Red;
             grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Style.BackColor = Color.Red;
+            Trace.WriteLine($"{grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Value} <-> {grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Value}");
             object temtNum = grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Value;
             grid.Rows[firstPoint.Item1].Cells[firstPoint.Item2].Value = grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Value;
             grid.Rows[secondPoint.Item1].Cells[secondPoint.Item2].Value = temtNum;

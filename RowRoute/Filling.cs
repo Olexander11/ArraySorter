@@ -9,19 +9,6 @@ namespace RowRoute
 {
     public class Filling : IOrder
     {
-        private int rows = 1;
-        private int columns = 1;
-        public (int, int) ArraySize
-        {
-            get => (rows, columns);
-            set
-            {
-                if (value.Item1 > 0)
-                    rows = value.Item1;
-                if (value.Item2 > 0)
-                    columns = value.Item2;
-            }
-        }
 
         public string OrderName => "Row filling";
         public override string ToString()
@@ -29,7 +16,7 @@ namespace RowRoute
             return OrderName;
         }
 
-        public IEnumerable<(int, int)> GetNumerator()
+        public IEnumerable<(int, int)> GetNumerator(int rows, int columns)
         {
             for (int i = 0; i < rows; i++)
             {
