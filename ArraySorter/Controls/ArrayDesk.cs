@@ -183,8 +183,6 @@ namespace ArraySorter
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
             order.ArraySize = (array.GetLength(0), array.GetLength(1));
             sorter.SortList = order.GetNumerator();
-
-            var tt = sorter.SortList.ToList();
             sorter.Array = array;
             sortingProcessLabel.Text = "Sorting culculation. Wait some time....";
             //string message = $"Start sortimg with method - {methodName}";

@@ -46,24 +46,42 @@ namespace SpiralRoute
             for (int c = 0; c < circles; c++)
             {
                 // up row
-                if (count < rows * columns)
+                if (c == columns - c - 1)
                 {
-                    for (int i = c; i < columns - c - 1; i++)
+                    count++;
+                    yield return (c, c);
+                }
+                else
+                {
+                    if (count < rows * columns)
                     {
-                        count++;
-                        yield return (c, i);
+                        for (int i = c; i < columns - c - 1; i++)
+                        {
+                            count++;
+                            yield return (c, i);
+                        }
                     }
                 }
 
+
                 // right col
-                if (count < rows * columns)
+                if (c == rows - c - 1)
                 {
-                    for (int i = c; i < rows - c - 1; i++)
+                    count++;
+                    yield return (c, c);
+                }
+                else
+                {
+                    if (count < rows * columns)
                     {
-                        count++;
-                        yield return (i, columns - c - 1);
+                        for (int i = c; i < rows - c - 1; i++)
+                        {
+                            count++;
+                            yield return (i, columns - c - 1);
+                        }
                     }
                 }
+
 
                 // down row
                 if (count < rows * columns)
