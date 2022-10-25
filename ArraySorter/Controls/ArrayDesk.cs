@@ -1,4 +1,5 @@
-﻿using ArraySorter.Controls;
+﻿using ArraySorter.ArrayCreator.FileCreator;
+using ArraySorter.Controls;
 using ArraySorter.DllLoader;
 using ArraySorter.Models;
 using ArraySorter.Models.ArrayModel;
@@ -45,6 +46,8 @@ namespace ArraySorter
             startSortingButton.Click += StartSortingButton_Click;
             speedUpButton.Click += SpeedUpButton_Click;
             speedDownButton.Click += SpeedDownButton_Click;
+
+            Logger.Logger logger = Logger.Logger.getInstance();
         }
 
         private void Invoker_MovieStoped(object sender, EventArgs e)
@@ -58,7 +61,7 @@ namespace ArraySorter
         private IOrder order = null;
         private bool sortHistoryByAsc = true;
         private Invoker invoker;
-
+        private Logger.Logger logger;
         private void UpdateHistoryButton_Click(object sender, EventArgs e)
         {
             UpdateHistoryGreed();
@@ -75,10 +78,9 @@ namespace ArraySorter
         {
             using (SortedArrayContext db = new SortedArrayContext())
             {
-                var source = new BindingSource();
-                source.DataSource = db.SortedArrays.OrderBy(a => a.SortingStart).ToList();
+                var source = new BindingSource();     
                 if (sortHistoryByAsc)
-                    source.DataSource = db.SortedArrays.OrderBy(a => a.SortingStart);
+                    source.DataSource = db.SortedArrays.OrderBy(a => a.SortingStart).ToList();
                 else
                     source.DataSource = db.SortedArrays.OrderByDescending(a => a.SortingStart).ToList();
 
@@ -121,7 +123,7 @@ namespace ArraySorter
             Control control = null;
             if (isRandom)
             {
-                control = new RandomArrayControl();                
+                control = new RandomArrayControl();
             }
             else
             {
@@ -141,6 +143,9 @@ namespace ArraySorter
                 processGridView.Rows.Clear();
                 int height = array.GetLength(0);
                 int width = array.GetLength(1);
+
+                string message = $"Selectede Array {height}X{width}.";
+                logger.Log(message);
 
                 processGridView.ColumnCount = width;
 
@@ -174,6 +179,8 @@ namespace ArraySorter
             sorter.SortList = order.GetNumerator();
             sorter.Array = array;
             sortingProcessLabel.Text = "Sorting culculation. Wait some time....";
+            string message = $"Start sortimg with method - {methodName}";
+            logger.Log(message);
             sorter.Sort();
             sortingProcessLabel.Text = "Sorting end. Look the process";
             DateTime endDate = DateTime.Now;
