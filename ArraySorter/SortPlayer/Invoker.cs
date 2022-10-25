@@ -25,7 +25,7 @@ namespace ArraySorter.SortPlayer
             }
         }
 
-        private readonly object speedLock = new object();
+        public event EventHandler MovieStoped;
         public Invoker(int speed)
         {
             this.speed = speed;
@@ -44,6 +44,7 @@ namespace ArraySorter.SortPlayer
                     comand.Play(speed);
                     await Task.Delay(speed);
                 }
+            MovieStoped?.Invoke(this, EventArgs.Empty);
         }
 
         public void Clear()

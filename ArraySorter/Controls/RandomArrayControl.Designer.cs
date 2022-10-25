@@ -39,7 +39,7 @@
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(22, 32);
+            this.infoLabel.Location = new System.Drawing.Point(13, 18);
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(66, 16);
             this.infoLabel.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // xNumericUpDown
             // 
-            this.xNumericUpDown.Location = new System.Drawing.Point(25, 67);
+            this.xNumericUpDown.Location = new System.Drawing.Point(15, 52);
             this.xNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -64,7 +64,7 @@
             // 
             // yNumericUpDown
             // 
-            this.yNumericUpDown.Location = new System.Drawing.Point(119, 67);
+            this.yNumericUpDown.Location = new System.Drawing.Point(108, 52);
             this.yNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -81,7 +81,7 @@
             // 
             // confirmButton
             // 
-            this.confirmButton.Location = new System.Drawing.Point(97, 106);
+            this.confirmButton.Location = new System.Drawing.Point(86, 80);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(86, 32);
             this.confirmButton.TabIndex = 3;
@@ -97,7 +97,7 @@
             this.Controls.Add(this.xNumericUpDown);
             this.Controls.Add(this.infoLabel);
             this.Name = "RandomArrayControl";
-            this.Size = new System.Drawing.Size(245, 161);
+            this.Size = new System.Drawing.Size(216, 133);
             ((System.ComponentModel.ISupportInitialize)(this.xNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yNumericUpDown)).EndInit();
             this.ResumeLayout(false);

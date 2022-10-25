@@ -31,10 +31,33 @@ namespace SnakeRoute
 
         public IEnumerable<(int, int)> GetNumerator()
         {
-            SchemeBuilder builder = new SchemeBuilder();
-            builder.GreateSchema(rows, columns);
-            foreach (var item in builder.GetMoves())
-                yield return item;
+            for (int x = 0; x < rows + columns; x++)
+            {
+                if (x % 2 == 0)
+                {
+                    int i = x, j = 0;
+                    while (i >= 0)
+                    {
+                        if (i < rows && j < columns)
+                            yield return (i, j);
+
+                        i--;
+                        j++;
+                    }
+                }
+                else
+                {
+                    int i = 0, j = x;
+                    while (j >= 0)
+                    {
+                        if (i < rows && j < columns)
+                            yield return (i, j);
+
+                        i++;
+                        j--;
+                    }
+                }
+            }
         }
     }
 }

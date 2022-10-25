@@ -41,12 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayMover.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandExecutor.cs" />
     <Compile Include="Filling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchemeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonInterfaces\CommonInterfaces.csproj">

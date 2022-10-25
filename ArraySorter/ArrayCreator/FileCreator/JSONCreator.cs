@@ -1,4 +1,5 @@
 ﻿using ArraySorter.Controls;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -17,11 +18,8 @@ namespace ArraySorter.ArrayCreator.FileCreator
         { 
             try
             {
-                //using (StreamReader r = new StreamReader(path))
-                //{
-
-                //}
-                //return ArrayConvertor.ArrayConvert();
+                int[][] doubleArray = JsonConvert.DeserializeObject<int[][]>(File.ReadAllText(path));
+                return ArrayConvertor.ArrayConvert(doubleArray);
             }
             catch
             {

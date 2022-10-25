@@ -35,38 +35,37 @@ namespace ArraySorter
             this.arraySourcePanel = new System.Windows.Forms.Panel();
             this.arrayTabControl = new System.Windows.Forms.TabControl();
             this.sortingTabPage = new System.Windows.Forms.TabPage();
+            this.methodGroupBox = new System.Windows.Forms.GroupBox();
+            this.sortMethodComboBox = new System.Windows.Forms.ComboBox();
             this.orderComboBox = new System.Windows.Forms.ComboBox();
             this.orderArrayLabel = new System.Windows.Forms.Label();
+            this.confirmMethodButton = new System.Windows.Forms.Button();
+            this.createGroupBox = new System.Windows.Forms.GroupBox();
+            this.fileRadioButton = new System.Windows.Forms.RadioButton();
+            this.ramdomRadioButton = new System.Windows.Forms.RadioButton();
             this.processPanel = new System.Windows.Forms.Panel();
             this.processGridView = new System.Windows.Forms.DataGridView();
             this.speedDownButton = new System.Windows.Forms.Button();
             this.speedUpButton = new System.Windows.Forms.Button();
             this.startSortingButton = new System.Windows.Forms.Button();
-            this.sortMethodComboBox = new System.Windows.Forms.ComboBox();
-            this.confirmMethodButton = new System.Windows.Forms.Button();
-            this.ramdomRadioButton = new System.Windows.Forms.RadioButton();
-            this.fileRadioButton = new System.Windows.Forms.RadioButton();
             this.historytabPage = new System.Windows.Forms.TabPage();
             this.updateHistoryButton = new System.Windows.Forms.Button();
             this.sortButton = new System.Windows.Forms.Button();
             this.sortingProcessDataGridView = new System.Windows.Forms.DataGridView();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.CreateGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.arrayTabControl.SuspendLayout();
             this.sortingTabPage.SuspendLayout();
+            this.methodGroupBox.SuspendLayout();
+            this.createGroupBox.SuspendLayout();
             this.processPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processGridView)).BeginInit();
             this.historytabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sortingProcessDataGridView)).BeginInit();
-            this.CreateGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sortingProcessLabel
             // 
             this.sortingProcessLabel.AutoSize = true;
-            this.sortingProcessLabel.Location = new System.Drawing.Point(256, 10);
+            this.sortingProcessLabel.Location = new System.Drawing.Point(253, 16);
             this.sortingProcessLabel.Name = "sortingProcessLabel";
             this.sortingProcessLabel.Size = new System.Drawing.Size(102, 16);
             this.sortingProcessLabel.TabIndex = 3;
@@ -101,9 +100,8 @@ namespace ArraySorter
             // 
             // sortingTabPage
             // 
-            this.sortingTabPage.Controls.Add(this.groupBox1);
-            this.sortingTabPage.Controls.Add(this.CreateGroupBox);
-            this.sortingTabPage.Controls.Add(this.stopButton);
+            this.sortingTabPage.Controls.Add(this.methodGroupBox);
+            this.sortingTabPage.Controls.Add(this.createGroupBox);
             this.sortingTabPage.Controls.Add(this.processPanel);
             this.sortingTabPage.Controls.Add(this.speedDownButton);
             this.sortingTabPage.Controls.Add(this.speedUpButton);
@@ -116,6 +114,29 @@ namespace ArraySorter
             this.sortingTabPage.TabIndex = 0;
             this.sortingTabPage.Text = "Sorting";
             this.sortingTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.methodGroupBox.Controls.Add(this.selectMethodLabel);
+            this.methodGroupBox.Controls.Add(this.sortMethodComboBox);
+            this.methodGroupBox.Controls.Add(this.orderComboBox);
+            this.methodGroupBox.Controls.Add(this.orderArrayLabel);
+            this.methodGroupBox.Controls.Add(this.confirmMethodButton);
+            this.methodGroupBox.Location = new System.Drawing.Point(6, 204);
+            this.methodGroupBox.Name = "groupBox1";
+            this.methodGroupBox.Size = new System.Drawing.Size(238, 235);
+            this.methodGroupBox.TabIndex = 1;
+            this.methodGroupBox.TabStop = false;
+            this.methodGroupBox.Text = "Sort method";
+            // 
+            // sortMethodComboBox
+            // 
+            this.sortMethodComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sortMethodComboBox.FormattingEnabled = true;
+            this.sortMethodComboBox.Location = new System.Drawing.Point(18, 52);
+            this.sortMethodComboBox.Name = "sortMethodComboBox";
+            this.sortMethodComboBox.Size = new System.Drawing.Size(175, 24);
+            this.sortMethodComboBox.TabIndex = 11;
             // 
             // orderComboBox
             // 
@@ -134,6 +155,50 @@ namespace ArraySorter
             this.orderArrayLabel.Size = new System.Drawing.Size(66, 16);
             this.orderArrayLabel.TabIndex = 16;
             this.orderArrayLabel.Text = "Sort order";
+            // 
+            // confirmMethodButton
+            // 
+            this.confirmMethodButton.Location = new System.Drawing.Point(18, 164);
+            this.confirmMethodButton.Name = "confirmMethodButton";
+            this.confirmMethodButton.Size = new System.Drawing.Size(188, 43);
+            this.confirmMethodButton.TabIndex = 10;
+            this.confirmMethodButton.Text = "Confirm method";
+            this.confirmMethodButton.UseVisualStyleBackColor = true;
+            // 
+            // CreateGroupBox
+            // 
+            this.createGroupBox.Controls.Add(this.fileRadioButton);
+            this.createGroupBox.Controls.Add(this.ramdomRadioButton);
+            this.createGroupBox.Controls.Add(this.arraySourcePanel);
+            this.createGroupBox.Location = new System.Drawing.Point(3, 22);
+            this.createGroupBox.Name = "CreateGroupBox";
+            this.createGroupBox.Size = new System.Drawing.Size(244, 159);
+            this.createGroupBox.TabIndex = 19;
+            this.createGroupBox.TabStop = false;
+            this.createGroupBox.Text = "Array source";
+            // 
+            // fileRadioButton
+            // 
+            this.fileRadioButton.AutoSize = true;
+            this.fileRadioButton.Location = new System.Drawing.Point(12, 16);
+            this.fileRadioButton.Name = "fileRadioButton";
+            this.fileRadioButton.Size = new System.Drawing.Size(50, 20);
+            this.fileRadioButton.TabIndex = 8;
+            this.fileRadioButton.TabStop = true;
+            this.fileRadioButton.Text = "File";
+            this.fileRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ramdomRadioButton
+            // 
+            this.ramdomRadioButton.AutoSize = true;
+            this.ramdomRadioButton.Checked = true;
+            this.ramdomRadioButton.Location = new System.Drawing.Point(120, 16);
+            this.ramdomRadioButton.Name = "ramdomRadioButton";
+            this.ramdomRadioButton.Size = new System.Drawing.Size(80, 20);
+            this.ramdomRadioButton.TabIndex = 9;
+            this.ramdomRadioButton.TabStop = true;
+            this.ramdomRadioButton.Text = "Random";
+            this.ramdomRadioButton.UseVisualStyleBackColor = true;
             // 
             // processPanel
             // 
@@ -159,78 +224,30 @@ namespace ArraySorter
             // 
             // speedDownButton
             // 
-            this.speedDownButton.Location = new System.Drawing.Point(668, 10);
+            this.speedDownButton.Location = new System.Drawing.Point(1088, 10);
             this.speedDownButton.Name = "speedDownButton";
             this.speedDownButton.Size = new System.Drawing.Size(123, 28);
             this.speedDownButton.TabIndex = 14;
             this.speedDownButton.Text = "Speed down";
             this.speedDownButton.UseVisualStyleBackColor = true;
-            this.speedDownButton.Click += new System.EventHandler(this.SpeedDownButton_Click);
             // 
             // speedUpButton
             // 
-            this.speedUpButton.Location = new System.Drawing.Point(525, 10);
+            this.speedUpButton.Location = new System.Drawing.Point(959, 10);
             this.speedUpButton.Name = "speedUpButton";
             this.speedUpButton.Size = new System.Drawing.Size(123, 28);
             this.speedUpButton.TabIndex = 13;
             this.speedUpButton.Text = "Speed up";
             this.speedUpButton.UseVisualStyleBackColor = true;
-            this.speedUpButton.Click += new System.EventHandler(this.SpeedUpButton_Click);
             // 
             // startSortingButton
             // 
-            this.startSortingButton.Location = new System.Drawing.Point(373, 10);
+            this.startSortingButton.Location = new System.Drawing.Point(807, 10);
             this.startSortingButton.Name = "startSortingButton";
             this.startSortingButton.Size = new System.Drawing.Size(146, 28);
             this.startSortingButton.TabIndex = 12;
             this.startSortingButton.Text = "Start sorting";
             this.startSortingButton.UseVisualStyleBackColor = true;
-            this.startSortingButton.Click += new System.EventHandler(this.StartSortingButton_Click);
-            // 
-            // sortMethodComboBox
-            // 
-            this.sortMethodComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sortMethodComboBox.FormattingEnabled = true;
-            this.sortMethodComboBox.Location = new System.Drawing.Point(18, 52);
-            this.sortMethodComboBox.Name = "sortMethodComboBox";
-            this.sortMethodComboBox.Size = new System.Drawing.Size(175, 24);
-            this.sortMethodComboBox.TabIndex = 11;
-            // 
-            // confirmMethodButton
-            // 
-            this.confirmMethodButton.Location = new System.Drawing.Point(18, 164);
-            this.confirmMethodButton.Name = "confirmMethodButton";
-            this.confirmMethodButton.Size = new System.Drawing.Size(188, 43);
-            this.confirmMethodButton.TabIndex = 10;
-            this.confirmMethodButton.Text = "Confirm method";
-            this.confirmMethodButton.UseVisualStyleBackColor = true;
-            this.confirmMethodButton.Click += new System.EventHandler(this.ConfirmMethodButton_Click);
-            // 
-            // ramdomRadioButton
-            // 
-            this.ramdomRadioButton.AutoSize = true;
-            this.ramdomRadioButton.Checked = true;
-            this.ramdomRadioButton.Location = new System.Drawing.Point(120, 16);
-            this.ramdomRadioButton.Name = "ramdomRadioButton";
-            this.ramdomRadioButton.Size = new System.Drawing.Size(80, 20);
-            this.ramdomRadioButton.TabIndex = 9;
-            this.ramdomRadioButton.TabStop = true;
-            this.ramdomRadioButton.Text = "Random";
-            this.ramdomRadioButton.UseVisualStyleBackColor = true;
-            this.ramdomRadioButton.CheckedChanged += new System.EventHandler(this.RandomRadioButton_CheckedChanged);
-            // 
-            // fileRadioButton
-            // 
-            this.fileRadioButton.AutoSize = true;
-            this.fileRadioButton.Location = new System.Drawing.Point(12, 16);
-            this.fileRadioButton.Name = "fileRadioButton";
-            this.fileRadioButton.Size = new System.Drawing.Size(50, 20);
-            this.fileRadioButton.TabIndex = 8;
-            this.fileRadioButton.TabStop = true;
-            this.fileRadioButton.Text = "File";
-            this.fileRadioButton.UseVisualStyleBackColor = true;
-            this.fileRadioButton.CheckedChanged += new System.EventHandler(this.RandomRadioButton_CheckedChanged);
-            this.fileRadioButton.ForeColorChanged += new System.EventHandler(this.RandomRadioButton_CheckedChanged);
             // 
             // historytabPage
             // 
@@ -276,41 +293,6 @@ namespace ArraySorter
             this.sortingProcessDataGridView.Size = new System.Drawing.Size(1216, 451);
             this.sortingProcessDataGridView.TabIndex = 0;
             // 
-            // stopButton
-            // 
-            this.stopButton.Location = new System.Drawing.Point(809, 10);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(146, 28);
-            this.stopButton.TabIndex = 18;
-            this.stopButton.Text = "Stop sorting";
-            this.stopButton.UseVisualStyleBackColor = true;
-            // 
-            // CreateGroupBox
-            // 
-            this.CreateGroupBox.Controls.Add(this.fileRadioButton);
-            this.CreateGroupBox.Controls.Add(this.ramdomRadioButton);
-            this.CreateGroupBox.Controls.Add(this.arraySourcePanel);
-            this.CreateGroupBox.Location = new System.Drawing.Point(3, 22);
-            this.CreateGroupBox.Name = "CreateGroupBox";
-            this.CreateGroupBox.Size = new System.Drawing.Size(244, 159);
-            this.CreateGroupBox.TabIndex = 19;
-            this.CreateGroupBox.TabStop = false;
-            this.CreateGroupBox.Text = "Array source";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.selectMethodLabel);
-            this.groupBox1.Controls.Add(this.sortMethodComboBox);
-            this.groupBox1.Controls.Add(this.orderComboBox);
-            this.groupBox1.Controls.Add(this.orderArrayLabel);
-            this.groupBox1.Controls.Add(this.confirmMethodButton);
-            this.groupBox1.Location = new System.Drawing.Point(6, 204);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 235);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Sort method";
-            // 
             // ArrayDesk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -322,14 +304,14 @@ namespace ArraySorter
             this.arrayTabControl.ResumeLayout(false);
             this.sortingTabPage.ResumeLayout(false);
             this.sortingTabPage.PerformLayout();
+            this.methodGroupBox.ResumeLayout(false);
+            this.methodGroupBox.PerformLayout();
+            this.createGroupBox.ResumeLayout(false);
+            this.createGroupBox.PerformLayout();
             this.processPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.processGridView)).EndInit();
             this.historytabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sortingProcessDataGridView)).EndInit();
-            this.CreateGroupBox.ResumeLayout(false);
-            this.CreateGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,9 +342,8 @@ namespace ArraySorter
         private System.Windows.Forms.DataGridView processGridView;
         private System.Windows.Forms.ComboBox orderComboBox;
         private System.Windows.Forms.Label orderArrayLabel;
-        private System.Windows.Forms.Button stopButton;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox CreateGroupBox;
+        private System.Windows.Forms.GroupBox methodGroupBox;
+        private System.Windows.Forms.GroupBox createGroupBox;
     }
 }
 

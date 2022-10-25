@@ -4,9 +4,11 @@ using ArraySorter.Models;
 using ArraySorter.Models.ArrayModel;
 using ArraySorter.SortPlayer;
 using CommonInterfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -17,19 +19,6 @@ namespace ArraySorter
     {
         public ArrayDesk()
         {
-            int[][] ar = new int[10][];
-            Random random = new Random();
-            for (int i = 0; i < ar.Length; i++)
-            {
-                ar[i] = new int[20];
-                for (int j = 0; j < ar[i].Length; j++)
-                {
-                    ar[i][j] = random.Next(1, 1000);
-                }
-            }
-
-
-
             InitializeComponent();
             sortMethodComboBox.DataSource = DllDirectoryLoader.LoadSorters();
             orderComboBox.DataSource = DllDirectoryLoader.LoadOrders();
@@ -41,7 +30,29 @@ namespace ArraySorter
                 sortingProcessDataGridView.DataSource = source;  
             }
             invoker = new Invoker(500);
+            invoker.MovieStoped += Invoker_MovieStoped;
+            processGridView.ReadOnly = true;
+            processGridView.ColumnHeadersVisible = false;
+            processGridView.RowHeadersVisible = false;
+            processGridView.AllowUserToAddRows = false;
+            ArraySourceSelected(true);
+            sortingProcessLabel.Text = "Sorting process.";
+            sortButton.Click += SortButton_Click;
+            updateHistoryButton.Click += UpdateHistoryButton_Click;
+            fileRadioButton.CheckedChanged += FileRadioButton_CheckedChanged;
+            ramdomRadioButton.CheckedChanged += RandomRadioButton_CheckedChanged;
+            confirmMethodButton.Click += ConfirmMethodButton_Click;
+            startSortingButton.Click += StartSortingButton_Click;
+            speedUpButton.Click += SpeedUpButton_Click;
+            speedDownButton.Click += SpeedDownButton_Click;
         }
+
+        private void Invoker_MovieStoped(object sender, EventArgs e)
+        {
+            DisableSelectSourseControls(false);
+            sortingProcessLabel.Text = "Sorting ended.";
+        }
+
         private int[,] array = null;
         private ISorter sorter = null;
         private IOrder order = null;
@@ -104,6 +115,7 @@ namespace ArraySorter
 
         private void ArraySourceSelected(bool isRandom)
         {
+            sortingProcessLabel.Text = "Sorting process.";
             arraySourcePanel.SuspendLayout();
             arraySourcePanel.Controls.Clear();
             Control control = null;
@@ -144,6 +156,8 @@ namespace ArraySorter
 
                     processGridView.Rows.Add(row);
                 }
+                processGridView.ClearSelection();
+                processGridView.CurrentCell = null;
             }
         }
 
@@ -152,19 +166,21 @@ namespace ArraySorter
         {
             DisableSelectSourseControls(true);
             DateTime startDate = DateTime.Now;
-            string incommingArrayStr = ArrayModelHelper.ArrayToString(array);
+            string incommingArrayStr = JsonConvert.SerializeObject(array); 
             string methodName = $"sort - {sorter.SorterName}, order - {order.OrderName}";
             sorter.ComparingElementsEvent += Sorter_ComparingElementsEvent;
             sorter.ChangingElementsEvent += Sorter_ChangingElementsEvent;
             order.ArraySize = (array.GetLength(0), array.GetLength(1));
             sorter.SortList = order.GetNumerator();
             sorter.Array = array;
+            sortingProcessLabel.Text = "Sorting culculation. Wait some time....";
             sorter.Sort();
+            sortingProcessLabel.Text = "Sorting end. Look the process";
             DateTime endDate = DateTime.Now;
-            string sortedArrayStr = ArrayModelHelper.ArrayToString(array);
+            string sortedArrayStr = JsonConvert.SerializeObject(array);
             using (SortedArrayContext db = new SortedArrayContext())
             {
-                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate.ToLongDateString(), SortingEnd = endDate.ToLongDateString() };
+                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fff"), SortingEnd = endDate.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fff") };
                 db.SortedArrays.Add(sortedArray);
                 db.SaveChanges();
             }
@@ -185,11 +201,13 @@ namespace ArraySorter
 
         private void DisableSelectSourseControls(bool disableControl)
         {
-            fileRadioButton.Enabled = disableControl;
-            ramdomRadioButton.Enabled = disableControl;
-            arraySourcePanel.Enabled = disableControl;
-            sortMethodComboBox.Enabled = disableControl;
-            confirmMethodButton.Enabled = disableControl;
+            fileRadioButton.Enabled = !disableControl;
+            ramdomRadioButton.Enabled = !disableControl;
+            arraySourcePanel.Enabled = !disableControl;
+            sortMethodComboBox.Enabled = !disableControl;
+            confirmMethodButton.Enabled = !disableControl;
+            arraySourcePanel.Visible = !disableControl;
+
         }
 
         private void ConfirmMethodButton_Click(object sender, EventArgs e)
@@ -229,9 +247,9 @@ namespace ArraySorter
         private void ChangeSpeed(bool speedy)
         {
             if (speedy)
-                invoker.Speed += 10;
-            else
                 invoker.Speed -= 10;
+            else
+                invoker.Speed += 10;
         }
     }
 }
