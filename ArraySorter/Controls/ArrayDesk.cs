@@ -46,8 +46,32 @@ namespace ArraySorter
             startSortingButton.Click += StartSortingButton_Click;
             speedUpButton.Click += SpeedUpButton_Click;
             speedDownButton.Click += SpeedDownButton_Click;
+            pauseButton.Click += PauseButton_Click;
+            stopButton.Click += StopButton_Click;
 
             logger = Logger.Logger.getInstance();
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            invoker.Stop();
+        }
+
+
+        private void PauseButton_Click(object sender, EventArgs e)
+        {        
+            if (isPaused)
+            {
+                invoker.Pause();
+                pauseButton.Text = "Play";
+                isPaused = false;
+            }
+            else
+            {
+                invoker.Continue();
+                pauseButton.Text = "Pause";
+                isPaused = true;
+            }
         }
 
         private void Invoker_MovieStoped(object sender, EventArgs e)
@@ -62,6 +86,7 @@ namespace ArraySorter
         private bool sortHistoryByAsc = true;
         private Invoker invoker;
         private NLog.Logger logger;
+        private bool isPaused;
         private void UpdateHistoryButton_Click(object sender, EventArgs e)
         {
             UpdateHistoryGreed();
@@ -143,9 +168,7 @@ namespace ArraySorter
                 processGridView.Rows.Clear();
                 int arrayRow = array.GetLength(0);
                 int arrayColumn = array.GetLength(1);
-
-                //string message = $"Selectede Array {arrayRow}X{arrayColumn}.";
-                //logger.Log(message);
+                logger.Log(NLog.LogLevel.Info, $"Selected Array {arrayRow}X{ arrayColumn}.");
 
                 processGridView.ColumnCount = arrayColumn;
 
@@ -192,7 +215,7 @@ namespace ArraySorter
             string sortedArrayStr = JsonConvert.SerializeObject(array);
             using (SortedArrayContext db = new SortedArrayContext())
             {
-                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fff"), SortingEnd = endDate.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fff") };
+                SortedArray sortedArray = new SortedArray { Id = GuidGenerator.Generate(), SorterName = methodName, IncommingArray = incommingArrayStr, SortingArray = sortedArrayStr, SortingStart = startDate.ToString("yyyyMMdd HH:mm:ss.fff"), SortingEnd = endDate.ToString("yyyyMMdd HH:mm:ss.fff") };
                 db.SortedArrays.Add(sortedArray);
                 db.SaveChanges();
             }
@@ -217,6 +240,7 @@ namespace ArraySorter
             ramdomRadioButton.Enabled = !disableControl;
             arraySourcePanel.Enabled = !disableControl;
             sortMethodComboBox.Enabled = !disableControl;
+            orderComboBox.Enabled = !disableControl;
             confirmMethodButton.Enabled = !disableControl;
             arraySourcePanel.Visible = !disableControl;
 

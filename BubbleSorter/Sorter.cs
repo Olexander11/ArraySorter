@@ -1,9 +1,6 @@
 ﻿using CommonInterfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BubbleSorter
 {
@@ -13,9 +10,8 @@ namespace BubbleSorter
         {
             return SorterName;
         }
-        private string sorterName = "Bubble Method";
-        public string SorterName { get => sorterName; }
 
+        public string SorterName => "Bubble Method";
 
         public event EventHandler<ArraySorterEventArgument> ComparingElementsEvent;
         public event EventHandler<ArraySorterEventArgument> ChangingElementsEvent;
@@ -40,7 +36,6 @@ namespace BubbleSorter
                     }
                 }
             }
-
         }
     }
 }

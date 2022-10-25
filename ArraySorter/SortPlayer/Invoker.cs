@@ -63,7 +63,7 @@ namespace ArraySorter.SortPlayer
         bool _paused = false;
         public void Pause()
         {
-            _paused = true;
+            _paused = !_paused;
         }
 
         public void Continue()

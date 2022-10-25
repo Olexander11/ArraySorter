@@ -52,6 +52,8 @@ namespace ArraySorter
             this.updateHistoryButton = new System.Windows.Forms.Button();
             this.sortButton = new System.Windows.Forms.Button();
             this.sortingProcessDataGridView = new System.Windows.Forms.DataGridView();
+            this.pauseButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.arrayTabControl.SuspendLayout();
             this.sortingTabPage.SuspendLayout();
             this.methodGroupBox.SuspendLayout();
@@ -100,6 +102,8 @@ namespace ArraySorter
             // 
             // sortingTabPage
             // 
+            this.sortingTabPage.Controls.Add(this.stopButton);
+            this.sortingTabPage.Controls.Add(this.pauseButton);
             this.sortingTabPage.Controls.Add(this.methodGroupBox);
             this.sortingTabPage.Controls.Add(this.createGroupBox);
             this.sortingTabPage.Controls.Add(this.processPanel);
@@ -115,7 +119,7 @@ namespace ArraySorter
             this.sortingTabPage.Text = "Sorting";
             this.sortingTabPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // methodGroupBox
             // 
             this.methodGroupBox.Controls.Add(this.selectMethodLabel);
             this.methodGroupBox.Controls.Add(this.sortMethodComboBox);
@@ -123,7 +127,7 @@ namespace ArraySorter
             this.methodGroupBox.Controls.Add(this.orderArrayLabel);
             this.methodGroupBox.Controls.Add(this.confirmMethodButton);
             this.methodGroupBox.Location = new System.Drawing.Point(6, 204);
-            this.methodGroupBox.Name = "groupBox1";
+            this.methodGroupBox.Name = "methodGroupBox";
             this.methodGroupBox.Size = new System.Drawing.Size(238, 235);
             this.methodGroupBox.TabIndex = 1;
             this.methodGroupBox.TabStop = false;
@@ -165,13 +169,13 @@ namespace ArraySorter
             this.confirmMethodButton.Text = "Confirm method";
             this.confirmMethodButton.UseVisualStyleBackColor = true;
             // 
-            // CreateGroupBox
+            // createGroupBox
             // 
             this.createGroupBox.Controls.Add(this.fileRadioButton);
             this.createGroupBox.Controls.Add(this.ramdomRadioButton);
             this.createGroupBox.Controls.Add(this.arraySourcePanel);
             this.createGroupBox.Location = new System.Drawing.Point(3, 22);
-            this.createGroupBox.Name = "CreateGroupBox";
+            this.createGroupBox.Name = "createGroupBox";
             this.createGroupBox.Size = new System.Drawing.Size(244, 159);
             this.createGroupBox.TabIndex = 19;
             this.createGroupBox.TabStop = false;
@@ -224,25 +228,25 @@ namespace ArraySorter
             // 
             // speedDownButton
             // 
-            this.speedDownButton.Location = new System.Drawing.Point(1088, 10);
+            this.speedDownButton.Location = new System.Drawing.Point(817, 10);
             this.speedDownButton.Name = "speedDownButton";
-            this.speedDownButton.Size = new System.Drawing.Size(123, 28);
+            this.speedDownButton.Size = new System.Drawing.Size(70, 28);
             this.speedDownButton.TabIndex = 14;
-            this.speedDownButton.Text = "Speed down";
+            this.speedDownButton.Text = "Down";
             this.speedDownButton.UseVisualStyleBackColor = true;
             // 
             // speedUpButton
             // 
-            this.speedUpButton.Location = new System.Drawing.Point(959, 10);
+            this.speedUpButton.Location = new System.Drawing.Point(738, 10);
             this.speedUpButton.Name = "speedUpButton";
-            this.speedUpButton.Size = new System.Drawing.Size(123, 28);
+            this.speedUpButton.Size = new System.Drawing.Size(73, 28);
             this.speedUpButton.TabIndex = 13;
-            this.speedUpButton.Text = "Speed up";
+            this.speedUpButton.Text = "Up";
             this.speedUpButton.UseVisualStyleBackColor = true;
             // 
             // startSortingButton
             // 
-            this.startSortingButton.Location = new System.Drawing.Point(807, 10);
+            this.startSortingButton.Location = new System.Drawing.Point(575, 10);
             this.startSortingButton.Name = "startSortingButton";
             this.startSortingButton.Size = new System.Drawing.Size(146, 28);
             this.startSortingButton.TabIndex = 12;
@@ -264,18 +268,18 @@ namespace ArraySorter
             // 
             // updateHistoryButton
             // 
-            this.updateHistoryButton.Location = new System.Drawing.Point(20, 6);
+            this.updateHistoryButton.Location = new System.Drawing.Point(8, 6);
             this.updateHistoryButton.Name = "updateHistoryButton";
-            this.updateHistoryButton.Size = new System.Drawing.Size(138, 23);
+            this.updateHistoryButton.Size = new System.Drawing.Size(150, 33);
             this.updateHistoryButton.TabIndex = 2;
             this.updateHistoryButton.Text = "Update history";
             this.updateHistoryButton.UseVisualStyleBackColor = true;
             // 
             // sortButton
             // 
-            this.sortButton.Location = new System.Drawing.Point(208, 6);
+            this.sortButton.Location = new System.Drawing.Point(186, 6);
             this.sortButton.Name = "sortButton";
-            this.sortButton.Size = new System.Drawing.Size(138, 23);
+            this.sortButton.Size = new System.Drawing.Size(160, 33);
             this.sortButton.TabIndex = 1;
             this.sortButton.Text = "Sort by Date";
             this.sortButton.UseVisualStyleBackColor = true;
@@ -292,6 +296,24 @@ namespace ArraySorter
             this.sortingProcessDataGridView.RowTemplate.Height = 24;
             this.sortingProcessDataGridView.Size = new System.Drawing.Size(1216, 451);
             this.sortingProcessDataGridView.TabIndex = 0;
+            // 
+            // pauseButton
+            // 
+            this.pauseButton.Location = new System.Drawing.Point(929, 10);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(70, 28);
+            this.pauseButton.TabIndex = 15;
+            this.pauseButton.Text = "Pause";
+            this.pauseButton.UseVisualStyleBackColor = true;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(1005, 10);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(70, 28);
+            this.stopButton.TabIndex = 16;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
             // 
             // ArrayDesk
             // 
@@ -344,6 +366,8 @@ namespace ArraySorter
         private System.Windows.Forms.Label orderArrayLabel;
         private System.Windows.Forms.GroupBox methodGroupBox;
         private System.Windows.Forms.GroupBox createGroupBox;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button pauseButton;
     }
 }
 

@@ -49,7 +49,7 @@
             // 
             this.xNumericUpDown.Location = new System.Drawing.Point(15, 52);
             this.xNumericUpDown.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -57,7 +57,7 @@
             this.xNumericUpDown.Size = new System.Drawing.Size(64, 22);
             this.xNumericUpDown.TabIndex = 1;
             this.xNumericUpDown.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -66,7 +66,7 @@
             // 
             this.yNumericUpDown.Location = new System.Drawing.Point(108, 52);
             this.yNumericUpDown.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -74,7 +74,7 @@
             this.yNumericUpDown.Size = new System.Drawing.Size(64, 22);
             this.yNumericUpDown.TabIndex = 2;
             this.yNumericUpDown.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
